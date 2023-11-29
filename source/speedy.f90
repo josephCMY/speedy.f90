@@ -4,7 +4,7 @@
 !> until the (continually updated) model datetime (`model_datetime`) equals the
 !> final datetime (`end_datetime`).
 program speedy
-    use params, only: nsteps, delt, nsteps_out, nstrad
+    use params, only: nsteps, delt, nsteps_out, nstrad, flag_perturb_init_condition
     use date, only: model_datetime, end_datetime, newdate, datetime_equal
     use shortwave_radiation, only: compute_shortwave
     use input_output, only: output
@@ -24,8 +24,6 @@ program speedy
     ! Initialization
     call initialize
 
-    ! If desired, add stochastic perturbations to initial conditions
-    if ( flag_perturb_init_condition ) call apply_temperature_perturbations
 
     ! Model main loop
     do while (.not. datetime_equal(model_datetime, end_datetime))
@@ -50,8 +48,12 @@ program speedy
         ! Increment model datetime
         call newdate
 
-        ! Output
-        if (mod(model_step-1, nsteps_out) == 0) call output(model_step-1,  vor, div, t, ps, tr, phi)
+        ! Output after the model is fully spun-up
+        if (mod(model_step-1, nsteps_out) == 0 .and. model_step > 13140) call output(model_step-1,  vor, div, t, ps, tr, phi)
+
+        
+        ! If desired, add stochastic perturbations to spun-up model state
+        if ( flag_perturb_init_condition .and. model_step == 13140) call apply_temperature_perturbations
 
         ! Exchange data with coupler
         call couple_sea_land(1+model_step/nsteps)

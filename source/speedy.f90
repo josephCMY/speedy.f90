@@ -14,6 +14,7 @@ program speedy
     use diagnostics, only: check_diagnostics
     use prognostics, only: vor, div, t, ps, tr, phi
     use forcing, only: set_forcing
+    use perturb_init_conditions, only : apply_temperature_perturbations
 
     implicit none
 
@@ -22,6 +23,9 @@ program speedy
 
     ! Initialization
     call initialize
+
+    ! If desired, add stochastic perturbations to initial conditions
+    if ( flag_perturb_init_condition ) call apply_temperature_perturbations
 
     ! Model main loop
     do while (.not. datetime_equal(model_datetime, end_datetime))

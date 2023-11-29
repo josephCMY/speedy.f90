@@ -1,7 +1,7 @@
 !> author: Man-Yau Chan
 !  date: 11/28/2023
 !  Applies stochastic perturbations to the initial rest state
-!  These perturbations are currently limit to temeprature perturbations
+!  These perturbations are currently limiedt to temperature perturbations
 module perturb_init_conditions
 
     use types, only: p

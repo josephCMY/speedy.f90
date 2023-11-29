@@ -29,7 +29,7 @@ contains
         PI = 4*ATAN(1.d0)
 
         ! Seed the random number generator
-        call RANDOM_SEED( put=random_init_seed )
+        call RANDOM_SEED( put=random_init_seed_arr )
 
         ! Draw noise from uniform random distribution
         call RANDOM_NUMBER( noise_array )

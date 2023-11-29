@@ -48,16 +48,18 @@ module params
 
     integer :: nstdia     !! Period (number of steps) for diagnostic print-out
     integer :: nsteps_out !! Number of time steps between outputs
+    integer :: random_init_seed
 
 contains
     !> Initializes user-defined parameters from namelist file.
     subroutine initialize_params
-        namelist /params/ nsteps_out, nstdia
+        namelist /params/ nsteps_out, nstdia, random_init_seed
         logical :: namelist_file_exists
 
         ! Set default values
         nsteps_out = 1
         nstdia = 36*5
+        random_init_seed = 0
 
         ! Read namelist file, if it exists
         inquire(file="namelist.nml", exist=namelist_file_exists)

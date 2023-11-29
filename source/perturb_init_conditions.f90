@@ -21,9 +21,9 @@ contains
 
         implicit none
 
-        real(mx,nx,kx,2) :: noise_array
-        real             :: noise_level = 0.001  ! --- Std dev of perturbations
-        real             :: PI
+        real :: noise_array(mx,nx,kx,2)
+        real :: noise_level = 0.001  ! --- Std dev of perturbations
+        real :: PI
 
         ! Compute PI
         PI = 4*ATAN(1.d0)

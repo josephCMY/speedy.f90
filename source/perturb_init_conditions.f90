@@ -8,6 +8,10 @@ module perturb_init_conditions
     use params
     use prognostics, only: t
 
+    private
+
+    public :: apply_temperature_perturbations
+
 
 contains
 

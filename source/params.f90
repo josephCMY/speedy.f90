@@ -10,7 +10,7 @@ module params
     public trunc, ix, iy, il, kx, nx, mx, ntr
     public nsteps, nstdia, nsteps_out, iseasc, nstrad, sppt_on, issty0, delt, rob, wil, alph
     public initialize_params
-    public random_init_seed, flag_perturb_init_condition
+    public random_init_seed_arr, flag_perturb_init_condition
 
     ! =========================================================================
     ! Constant parameters
@@ -50,6 +50,7 @@ module params
     integer :: nstdia     !! Period (number of steps) for diagnostic print-out
     integer :: nsteps_out !! Number of time steps between outputs
     integer :: random_init_seed
+    integer :: random_init_seed_arr(1)
     logical :: flag_perturb_init_condition
 
 contains
@@ -71,6 +72,8 @@ contains
             read(10, nml=params)
             close(10)
         end if
+
+        random_init_seed_arr(1) = random_init_seed
 
         ! Print values to screen
         write (*,'(A,I5)') 'nsteps_out (frequency of output)  = ', nsteps_out

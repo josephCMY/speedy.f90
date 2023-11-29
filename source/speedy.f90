@@ -48,12 +48,11 @@ program speedy
         ! Increment model datetime
         call newdate
 
-        ! Output after the model is fully spun-up
-        if (mod(model_step-1, nsteps_out) == 0 .and. model_step > 13140) call output(model_step-1,  vor, div, t, ps, tr, phi)
-
-        
         ! If desired, add stochastic perturbations to spun-up model state
         if ( flag_perturb_init_condition .and. model_step == 13140) call apply_temperature_perturbations
+
+        ! Output after the model is fully spun-up
+        if (mod(model_step-1, nsteps_out) == 0 .and. model_step > 13140) call output(model_step-1,  vor, div, t, ps, tr, phi)
 
         ! Exchange data with coupler
         call couple_sea_land(1+model_step/nsteps)

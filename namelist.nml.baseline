@@ -4,7 +4,7 @@
 nsteps_out                 = 1,
 nstdia                     = 180,
 random_init_seed           = 0,
-flag_perturb_init_condition=.true.,
+flag_perturb_init_condition=.false.,
 /
 
 ! start_datetime = the start datetime of the model integration

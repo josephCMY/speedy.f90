@@ -52,11 +52,12 @@ module params
     integer :: random_init_seed
     integer :: random_init_seed_arr(1)
     logical :: flag_perturb_init_condition
+    integer :: noise_injection_model_step_number
 
 contains
     !> Initializes user-defined parameters from namelist file.
     subroutine initialize_params
-        namelist /params/ nsteps_out, nstdia, random_init_seed, flag_perturb_init_condition
+        namelist /params/ nsteps_out, nstdia, random_init_seed, flag_perturb_init_condition, noise_injection_model_step_number
         logical :: namelist_file_exists
 
         ! Set default values
@@ -64,6 +65,7 @@ contains
         nstdia = 36*5
         random_init_seed = 0
         flag_perturb_init_condition = .false.
+        noise_injection_model_step_number = 0
 
         ! Read namelist file, if it exists
         inquire(file="namelist.nml", exist=namelist_file_exists)

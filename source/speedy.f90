@@ -4,7 +4,7 @@
 !> until the (continually updated) model datetime (`model_datetime`) equals the
 !> final datetime (`end_datetime`).
 program speedy
-    use params, only: nsteps, delt, nsteps_out, nstrad, flag_perturb_init_condition
+    use params, only: nsteps, delt, nsteps_out, nstrad, flag_perturb_init_condition, noise_injection_model_step_number
     use date, only: model_datetime, end_datetime, newdate, datetime_equal
     use shortwave_radiation, only: compute_shortwave
     use input_output, only: output
@@ -27,6 +27,10 @@ program speedy
 
     ! Model main loop
     do while (.not. datetime_equal(model_datetime, end_datetime))
+
+        ! Add stochastic perturbations at namelist-specified time point
+        if ( flag_perturb_init_condition .and. model_step == noise_injection_model_step_number) call apply_temperature_perturbations
+
         ! Daily tasks
         if (mod(model_step-1, nsteps) == 0) then
             ! Set forcing terms according to date
@@ -47,9 +51,6 @@ program speedy
 
         ! Increment model datetime
         call newdate
-
-        ! If desired, add stochastic perturbations to spun-up model state
-        if ( flag_perturb_init_condition .and. model_step == 13140) call apply_temperature_perturbations
 
         ! Output after the model is fully spun-up
         if (mod(model_step-1, nsteps_out) == 0 .and. model_step >= 13140) call output(model_step-1,  vor, div, t, ps, tr, phi)

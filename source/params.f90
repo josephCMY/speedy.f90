@@ -10,7 +10,7 @@ module params
     public trunc, ix, iy, il, kx, nx, mx, ntr
     public nsteps, nstdia, nsteps_out, iseasc, nstrad, sppt_on, issty0, delt, rob, wil, alph
     public initialize_params
-    public random_init_seed_arr, flag_perturb_init_condition
+    public random_init_seed_arr, flag_perturb_init_condition, noise_injection_model_step_number
 
     ! =========================================================================
     ! Constant parameters

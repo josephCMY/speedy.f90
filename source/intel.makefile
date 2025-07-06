@@ -15,7 +15,7 @@ profile : base_target
 BASE=-convert big_endian -warn all
 
 # Optimisation flags (disabled for debugging, profiling etc.)
-OPT=-Ofast
+OPT=-O3
 
 # # Location of NetCDF module (netcdf.mod)
 INC=-I$(NETCDF)/include

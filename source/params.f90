@@ -28,7 +28,7 @@ module params
                                        !! tracer)
 
     ! Time stepping parameters
-    integer, parameter :: nsteps = 72  !36         !! Number of time steps in one day
+    integer, parameter :: nsteps = 288  !36         !! Number of time steps in one day
     real(p), parameter    :: delt = 86400.0/nsteps !! Time step in seconds
     real(p), parameter    :: rob = 0.05       !! Damping factor in Robert time filter
     real(p), parameter    :: wil = 0.53            !! Parameter of Williams filter

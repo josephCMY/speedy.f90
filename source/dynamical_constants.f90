@@ -21,10 +21,10 @@ module dynamical_constants
     !                                          ! (del^2) in the stratosphere
     ! real(p), parameter :: tdrs   = 24.0*30.0 ! Damping time (in hours) for drag on zonal-mean wind
     !                                          ! in the stratosphere
-    real(p), parameter :: thd    = 2.4*2        ! Max damping time (in hours) for horizontal diffusion
-                                                ! (del^6) of temperature and vorticity
-    real(p), parameter :: thdd   = 2.4*2        ! Max damping time (in hours) for horizontal diffusion
-                                                ! (del^6) of divergence
+    real(p), parameter :: thd    = 2.4*10        ! Max damping time (in hours) for horizontal diffusion
+                                                 ! (del^6) of temperature and vorticity
+    real(p), parameter :: thdd   = 2.4*10        ! Max damping time (in hours) for horizontal diffusion
+                                                 ! (del^6) of divergence
     real(p), parameter :: thds   = 12.0       ! Max damping time (in hours) for extra diffusion
                                               ! (del^2) in the stratosphere
     real(p), parameter :: tdrs   = 24.0*30.0  ! Damping time (in hours) for drag on zonal-mean wind

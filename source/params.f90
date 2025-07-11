@@ -17,7 +17,7 @@ module params
     ! =========================================================================
 
     ! Model geometry parameters
-    integer, parameter :: trunc = 60   !! Spectral truncation total wavenumber
+    integer, parameter :: trunc = 30   !! Spectral truncation total wavenumber
     integer, parameter :: ix = 96      !! Number of longitudes
     integer, parameter :: iy = 24      !! Number of latitudes in hemisphere
     integer, parameter :: il = 2*iy    !! Number of latitudes in full sphere

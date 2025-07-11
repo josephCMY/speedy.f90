@@ -18,8 +18,8 @@ module params
 
     ! Model geometry parameters
     integer, parameter :: trunc = 60   !! Spectral truncation total wavenumber
-    integer, parameter :: ix = 240      !! Number of longitudes
-    integer, parameter :: iy = 60      !! Number of latitudes in hemisphere
+    integer, parameter :: ix = 96      !! Number of longitudes
+    integer, parameter :: iy = 24      !! Number of latitudes in hemisphere
     integer, parameter :: il = 2*iy    !! Number of latitudes in full sphere
     integer, parameter :: kx = 8       !! Number of vertical levels
     integer, parameter :: nx = trunc+2 !! Number of total wavenumbers for spectral storage arrays

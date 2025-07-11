@@ -27,6 +27,6 @@ module dynamical_constants
                                                  ! (del^6) of divergence
     real(p), parameter :: thds   = 12.0*20       ! Max damping time (in hours) for extra diffusion
                                               ! (del^2) in the stratosphere
-    real(p), parameter :: tdrs   = 24.0*30.0*20  ! Damping time (in hours) for drag on zonal-mean wind
+    real(p), parameter :: tdrs   = 24.0*30.0  ! Damping time (in hours) for drag on zonal-mean wind
                                               ! in the stratosphere
 end module

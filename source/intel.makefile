@@ -15,7 +15,7 @@ profile : base_target
 BASE=-convert big_endian -warn all
 
 # Optimisation flags (disabled for debugging, profiling etc.)
-OPT=-Ofast
+OPT=-O3
 
 # # Location of NetCDF module (netcdf.mod)
 INC=-I$(NETCDF)/include
@@ -60,7 +60,8 @@ FILES= \
 	   tendencies.o \
 	   time_stepping.o \
 	   types.o \
-	   vertical_diffusion.o
+	   vertical_diffusion.o \
+	   perturb_init_conditions.o
 
 %.o: %.f90
 	$(FC) $(COMPOPTS) -c $< $(INC)
@@ -73,7 +74,7 @@ clean:
 	rm -f *.o *.mod
 
 speedy.o               : params.o date.o input_output.o shortwave_radiation.o time_stepping.o\
-                         diagnostics.o
+                         diagnostics.o perturb_init_conditions.o
 auxiliaries.o          : params.o types.o
 boundaries.o           : physical_constants.o params.o input_output.o spectral.o types.o
 convection.o           : params.o physical_constants.o types.o
@@ -122,3 +123,4 @@ tendencies.o           : params.o implicit.o prognostics.o physical_constants.o 
 time_stepping.o        : dynamical_constants.o params.o prognostics.o tendencies.o\
                          horizontal_diffusion.o types.o
 vertical_diffusion     : params.o physical_constants.o geometry.o types.o
+perturb_init_conditions.o : types.o params.o prognostics.o

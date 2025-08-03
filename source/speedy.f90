@@ -4,7 +4,7 @@
 !> until the (continually updated) model datetime (`model_datetime`) equals the
 !> final datetime (`end_datetime`).
 program speedy
-    use params, only: nsteps, delt, nsteps_out, nstrad
+    use params, only: nsteps, delt, nsteps_out, nstrad, flag_perturb_init_condition, noise_injection_model_step_number
     use date, only: model_datetime, end_datetime, newdate, datetime_equal
     use shortwave_radiation, only: compute_shortwave
     use input_output, only: output
@@ -14,6 +14,7 @@ program speedy
     use diagnostics, only: check_diagnostics
     use prognostics, only: vor, div, t, ps, tr, phi
     use forcing, only: set_forcing
+    use perturb_init_conditions, only : apply_temperature_perturbations
 
     implicit none
 
@@ -23,8 +24,13 @@ program speedy
     ! Initialization
     call initialize
 
+
     ! Model main loop
     do while (.not. datetime_equal(model_datetime, end_datetime))
+
+        ! Add stochastic perturbations at namelist-specified time point
+        if ( flag_perturb_init_condition .and. model_step == noise_injection_model_step_number) call apply_temperature_perturbations
+
         ! Daily tasks
         if (mod(model_step-1, nsteps) == 0) then
             ! Set forcing terms according to date
@@ -46,8 +52,8 @@ program speedy
         ! Increment model datetime
         call newdate
 
-        ! Output
-        if (mod(model_step-1, nsteps_out) == 0) call output(model_step-1,  vor, div, t, ps, tr, phi)
+        ! Output after the model is fully spun-up
+        if (mod(model_step-1, nsteps_out) == 0 .and. model_step >= 365*288) call output(model_step-1,  vor, div, t, ps, tr, phi)
 
         ! Exchange data with coupler
         call couple_sea_land(1+model_step/nsteps)

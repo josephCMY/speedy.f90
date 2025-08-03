@@ -1,6 +1,13 @@
-![Zenodo DOI: 10.5281/zenodo.5816982](https://zenodo.org/badge/DOI/10.5281/zenodo.5816982.svg)
-
 speedy.f90 is an intermediate complexity atmospheric general circulation model written in modern Fortran. It is based on [SPEEDY](http://users.ictp.it/~kucharsk/speedy-net.html), developed by Fred Kucharski, Franco Molteni and Martin P. King.
+
+
+## Disclaimers
+This branch is created by Man-Yau (Joseph) Chan for the purpose of injecting noise into the initial conditions.
+
+The original speedy.f90 repository can be found [here](https://github.com/samhatfield/speedy.f90).
+
+
+
 
 ## Installation
 

@@ -10,6 +10,7 @@ module params
     public trunc, ix, iy, il, kx, nx, mx, ntr
     public nsteps, nstdia, nsteps_out, iseasc, nstrad, sppt_on, issty0, delt, rob, wil, alph
     public initialize_params
+    public random_init_seed_arr, flag_perturb_init_condition, noise_injection_model_step_number
 
     ! =========================================================================
     ! Constant parameters
@@ -48,16 +49,23 @@ module params
 
     integer :: nstdia     !! Period (number of steps) for diagnostic print-out
     integer :: nsteps_out !! Number of time steps between outputs
+    integer :: random_init_seed
+    integer :: random_init_seed_arr(1)
+    logical :: flag_perturb_init_condition
+    integer :: noise_injection_model_step_number
 
 contains
     !> Initializes user-defined parameters from namelist file.
     subroutine initialize_params
-        namelist /params/ nsteps_out, nstdia
+        namelist /params/ nsteps_out, nstdia, random_init_seed, flag_perturb_init_condition, noise_injection_model_step_number
         logical :: namelist_file_exists
 
         ! Set default values
         nsteps_out = 1
         nstdia = 36*5
+        random_init_seed = 0
+        flag_perturb_init_condition = .false.
+        noise_injection_model_step_number = 0
 
         ! Read namelist file, if it exists
         inquire(file="namelist.nml", exist=namelist_file_exists)
@@ -66,6 +74,8 @@ contains
             read(10, nml=params)
             close(10)
         end if
+
+        random_init_seed_arr(1) = random_init_seed
 
         ! Print values to screen
         write (*,'(A,I5)') 'nsteps_out (frequency of output)  = ', nsteps_out

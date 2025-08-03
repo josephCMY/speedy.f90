@@ -3,7 +3,7 @@
 # Define directory names
 ROOT=`pwd`
 BIN=$ROOT/bin
-RUNDIR=$ROOT/rundir
+RUNDIR=$ROOT/scratch/perturb_run
 CLIM=$ROOT/data/bc/t30/clim
 ANOM=$ROOT/data/bc/t30/anom
 
@@ -31,7 +31,7 @@ ln -s $CLIM/soil.nc .
 ln -s $ANOM/sea_surface_temperature_anomaly.nc .
 
 # Copy namelist file to run directory
-cp ../namelist.nml $RUNDIR
+cp $ROOT/namelist.nml $RUNDIR
 
 # Run SPEEDY
 if [ "$1" = "--profile" ]; then
